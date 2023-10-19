@@ -1,11 +1,14 @@
 import React, { useState } from "react";
 import { Button, Form } from "react-bootstrap";
+import TaskList from "./TaskList";
 
 const Formtask = () => {
   const [task, setTask] = useState("");
   const [tasks, setTasks] = useState([]);
   const handleSubmit = (event) => {
     event.preventDefault();
+    setTasks([...tasks, task]);
+    setTask("");
   };
   return (
     <>
@@ -16,12 +19,16 @@ const Formtask = () => {
             type="text"
             placeholder="Ingresar tarea"
             onChange={(event) => setTask(event.target.value)}
+            value={task}
           />
           <Button variant="primary" type="submit">
             Agregar
           </Button>
         </Form.Group>
       </Form>
+      <section className="container">
+        <TaskList taskArray={tasks}></TaskList>
+      </section>
     </>
   );
 };
